@@ -1,0 +1,32 @@
+.page {
+  background-image: url("https://res.cloudinary.com/fragmods/image/upload/v1645036180/sapasac/fondo_zcbped.png");
+}
+.container {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+}
+
+.image {
+  position: absolute;
+  top: 0.02in;
+  left: 0in;
+  width: 9.27in;
+  height: 11.97in;
+}
+
+.title {
+  position: absolute;
+  top: 1.07in;
+  left: 2.54in;
+  width: 4.32in;
+  line-height: 0.31in;
+}
+
+.text {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18pt;
+  font-family: Arial;
+  color: #000;
+}

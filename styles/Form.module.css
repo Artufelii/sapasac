@@ -1,0 +1,92 @@
+.form {
+  background-color: #fff;
+  width: 500px;
+  height: auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px rgb(0, 0, 0, 0.5);
+}
+
+.input,
+.textarea {
+  padding: 5px;
+  margin: 5px 0 10px 0;
+  border-radius: 5px;
+  border: 1px solid #000;
+  box-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
+  line-height: 30px;
+  outline-color: #EE333A;
+}
+
+.input {
+  width: 100%;
+  height: 30px;
+}
+
+.textarea {
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 100px;
+  max-height: 150px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.label {
+  margin-right: 10px;
+}
+
+.select {
+  width: 33%;
+  height: 30px;
+  border-radius: 5px;
+  outline-color: #EE333A;
+  margin-right: 100px;
+}
+
+.button,
+.excel,
+.disabled {
+  width: 100%;
+  height: 30px;
+  background-color: #EE333A;
+  color: #fff;
+  padding: 5px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button:active {
+  box-shadow: inset 2px 2px rgba(0, 0, 0, 0.3); 
+}
+
+.disabled {
+  background-color: #ddd;
+  color: #000;
+  cursor: not-allowed;
+}
+
+.excel {
+  background-color: #217245;
+}
+
+.buscador {
+ width: 500px;
+ height: 30px;
+ margin-bottom: 30px;
+ outline-color: #EE333A;
+}
+
+.btn {
+  padding: 6px;
+  background-color: #EE333A;
+  color: #fff;
+  border: 1px solid transparent;
+}
+
+
+
+
+
+
+

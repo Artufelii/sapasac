@@ -1,0 +1,36 @@
+.container {
+ background-color: #fff; 
+ padding: 5px;
+ width: 100%;
+}
+
+.container,
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.image {
+  padding: 5px;
+  width: 200px;
+  cursor: pointer;
+}
+
+.list {
+  list-style: none;
+  width: 35%;
+}
+
+.list li {
+  padding: 8px;
+}
+
+.list li:hover {
+  background-color: #eee;
+  opacity: 0.8;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 5px;
+}
