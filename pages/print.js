@@ -6,7 +6,7 @@ const ReportsDocument = dynamic(() => import('../components/Document'), {
   ssr: false,
 })
 
-function print(){
+function Print(){
 
   const { users, user } = useContext(UsersContext)
 
@@ -22,4 +22,4 @@ function print(){
   
 }
 
-export default print
+export default Print

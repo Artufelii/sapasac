@@ -4,7 +4,7 @@ import Form from "../components/Form"
 import Layout from "../components/Layout"
 import {UsersContext} from "../UsersContext"
 
-function edit(){
+function Edit(){
   const { user } = useContext(UsersContext)
 
   return(
@@ -17,4 +17,4 @@ function edit(){
   )
 }
 
-export default edit
+export default Edit
