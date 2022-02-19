@@ -1,7 +1,7 @@
 import axios from 'axios'
 import styles from '../styles/Form.module.css'
 
-function Buscador({ users, setUsers, url }){
+function Buscador({ users, setUsers, url, page = 0, perPage = 0 }){
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -74,6 +74,10 @@ function Buscador({ users, setUsers, url }){
         method: 'GET',
         url: `/api/${url}`,
       })
+
+      if (url === 'reportes') {
+        return setUsers(data.slice((page - 1) * perPage, page * perPage))
+      }
 
       setUsers(data)
     }
