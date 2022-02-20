@@ -1,7 +1,7 @@
 import axios from 'axios'
 import styles from '../styles/Form.module.css'
 
-function Buscador({ users, setUsers, url, page = 0, perPage = 0 }){
+function Buscador({ users, setUsers, id, page = 0, perPage = 0 }){
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -72,14 +72,17 @@ function Buscador({ users, setUsers, url, page = 0, perPage = 0 }){
     if (value === '') {
       const {data} = await axios({
         method: 'GET',
-        url: `/api/${url}`,
+        url: '/api/reports',
       })
 
-      if (url === 'reportes') {
+      if (id === 'reportes') {
         return setUsers(data.slice((page - 1) * perPage, page * perPage))
       }
 
-      setUsers(data)
+      setUsers(data.filter(({ date }) => {
+        return new Date(date).toLocaleDateString() === new Date().toLocaleDateString() 
+      }))
+
     }
   }
 

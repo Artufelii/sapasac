@@ -1,35 +1,25 @@
 import axios from 'axios'
 import Head from 'next/head'
-import { useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
+import {Pagination} from '@material-ui/lab'
 import Layout from '../components/Layout'
 import Table from '../components/Table'
 import Buscador from '../components/Buscador'
-import {Pagination} from '@material-ui/lab'
+import {UsersContext} from '../UsersContext'
 
 export default function Reportes() {
-
+  const { users } = useContext(UsersContext)
   const perPage = 15
-  const [allUsers, setAllUsers] = useState([])
   const [page, setPage] = useState(1)
-  const [filtro, setFiltro] = useState(allUsers.slice((page-1) * perPage, page * perPage))
-  const count = Math.ceil(allUsers.length / perPage)
+
+  const [filtro, setFiltro] = useState(users.slice((page-1) * perPage, page * perPage))
+
+  const count = Math.ceil(users.length / perPage)
 
   const handleChange = (event, value) => {
     setPage(value)
-    setFiltro(allUsers.slice((value-1) * perPage, value * perPage))
+    setFiltro(users.slice((value-1) * perPage, value * perPage))
   }
-
-  useEffect(() => {
-    const getUsers = async () => {
-      const {data} = await axios({
-        method: 'GET',
-        url: '/api/reportes',
-      })
-      setAllUsers(data)
-    }
-    getUsers()
-
-  }, [setAllUsers])
 
   return (
     <Layout>
@@ -41,7 +31,7 @@ export default function Reportes() {
       <Buscador
         users={filtro} 
         setUsers={setFiltro} 
-        url={'reportes'} 
+        id={'reportes'} 
         page={page}
         perPage={perPage}
       />

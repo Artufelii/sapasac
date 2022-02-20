@@ -3,7 +3,7 @@ import {pool} from "../../../config/db"
 export default async function handler(req, res) {
   switch (req.method) {
     case 'GET':
-      const [response] = await pool.query('SELECT * FROM usuarios WHERE date(date) = CURDATE()')
+      const [response] = await pool.query('SELECT * FROM usuarios')
       return res
               .status(200)
               .json(response)
