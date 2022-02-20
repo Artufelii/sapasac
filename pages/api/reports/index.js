@@ -3,7 +3,7 @@ import {pool} from "../../../config/db"
 export default async function handler(req, res) {
   switch (req.method) {
     case 'GET':
-      const [response] = await pool.query('SELECT * FROM usuarios')
+      const [response] = await pool.query('SELECT * FROM usuarios ORDER BY id DESC')
       return res
               .status(200)
               .json(response)

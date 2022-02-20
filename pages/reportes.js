@@ -9,7 +9,8 @@ import {UsersContext} from '../UsersContext'
 
 export default function Reportes() {
   const { users } = useContext(UsersContext)
-  const perPage = 15
+  
+  const perPage = 20
   const [page, setPage] = useState(1)
 
   const [filtro, setFiltro] = useState(users.slice((page-1) * perPage, page * perPage))
@@ -29,7 +30,7 @@ export default function Reportes() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Buscador
-        users={filtro} 
+        users={users} 
         setUsers={setFiltro} 
         id={'reportes'} 
         page={page}
