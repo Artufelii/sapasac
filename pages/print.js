@@ -10,12 +10,16 @@ function Print(){
 
   const { users, user } = useContext(UsersContext)
 
+  const filterUsers = users.filter(({ date }) => {
+    return new Date(date).toLocaleDateString() === new Date().toLocaleDateString()
+  })
+
   return (
     <>
       {
         user.length !== 0 ? 
           <ReportsDocument users={user}/> :
-          <ReportsDocument users={users}/>
+          <ReportsDocument users={filterUsers}/>
       }
     </>
   ) 

@@ -65,7 +65,15 @@ function Buscador({ users, setUsers, id, page = 0, perPage = 0 }){
     }
 
     const result = users.filter(filter)
-    setUsers(result)
+
+    if (id === 'reportes') {
+      return setUsers(result.slice((page - 1) * perPage, page * perPage))
+    }
+
+    setUsers(result.filter(({ date }) => {
+      return new Date(date).toLocaleDateString() === new Date().toLocaleDateString() 
+    }))
+
   }
 
   const handleChange = async ({target: { value }}) => {
