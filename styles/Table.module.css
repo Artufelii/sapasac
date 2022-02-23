@@ -12,7 +12,18 @@
   padding: 8px;
 }
 
-.table tr:nth-child(even) {
+.tr:nth-child(even) {
   background-color: #fff;
 }
 
+.amarillo {
+  background-color: yellow;
+}
+
+.rojo {
+  background-color: red;
+}
+
+.svg {
+  font-size: 10px;
+}
