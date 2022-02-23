@@ -76,22 +76,20 @@ function Buscador({ users, setUsers, id, page = 0, perPage = 0 }){
 
   }
 
-  const handleChange = async ({target: { value }}) => {
-    if (value === '') {
-      const {data} = await axios({
-        method: 'GET',
-        url: '/api/reports',
-      })
+  const handleChange = async () => {
+    const {data} = await axios({
+      method: 'GET',
+      url: '/api/reports',
+    })
 
-      if (id === 'reportes') {
-        return setUsers(data.slice((page - 1) * perPage, page * perPage))
-      }
-
-      setUsers(data.filter(({ date }) => {
-        return new Date(date).toLocaleDateString() === new Date().toLocaleDateString() 
-      }))
-
+    if (id === 'reportes') {
+      return setUsers(data.slice((page - 1) * perPage, page * perPage))
     }
+
+    setUsers(data.filter(({ date }) => {
+      return new Date(date).toLocaleDateString() === new Date().toLocaleDateString() 
+    }))
+
   }
 
   return(

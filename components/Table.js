@@ -23,6 +23,20 @@ function Table({users, id = ''}){
     setTimeout(() => setUser([]), 6000*10*5)
   }
 
+  const handleStatus = async (id) => {
+    const data = {
+      status: 1
+    }
+
+    await axios({
+      method: 'PUT',
+      url: `/api/reports/${id}`,
+      data
+    })
+
+    router.push('/')
+  }
+
   const daysPassed = (date1, date2) => {
     return Math.round((date2.getTime() - date1.getTime()) / 86400000)
   }
@@ -48,7 +62,7 @@ function Table({users, id = ''}){
         </tr>
       </thead>
       <tbody>
-        {users && users.map(({id, area, date, name, adress, colony, phone, mail, media, service, obs}) => (
+        {users && users.map(({id, area, date, name, adress, colony, phone, mail, service, obs, status}) => (
           <tr 
             key={id}
           >
@@ -93,14 +107,16 @@ function Table({users, id = ''}){
               <FontAwesomeIcon icon={ faPenToSquare }/>
             </td>
             <td 
-              onClick={() => console.log(id)}
-              style={{ cursor: 'pointer' }}
+              onClick={() => handleStatus(id)}
+              style={{ cursor: 'pointer', fontSize: '10px' }}
             >
               {
-                daysPassed(new Date(date), new Date()) >= 2 && daysPassed(new Date(date), new Date()) < 5 ? 
+                daysPassed(new Date(date), new Date()) >= 2 && daysPassed(new Date(date), new Date()) < 5 && !status ? 
                   <FontAwesomeIcon icon={ faExclamationTriangle } color='yellow'/> :
-                daysPassed(new Date(date), new Date()) >= 5 ? 
+                daysPassed(new Date(date), new Date()) >= 5 && !status ? 
                   <FontAwesomeIcon icon={ faCircleXmark } color='red'/> :
+                status ? 
+                  <FontAwesomeIcon icon={ faCircleCheck } color='green'/> : 
                   <FontAwesomeIcon icon={ faCircleCheck } color='black'/> 
               }
             </td>
