@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import styles from '../styles/Table.module.css'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,6 +11,7 @@ function Table({users, id = ''}){
 
   const { setUser } = useContext(UsersContext)
   const router = useRouter()
+  const [color, setColor] = useState(false)
 
   const handleClick = async(id, route) => {
     const {data} = await axios({
@@ -24,6 +26,7 @@ function Table({users, id = ''}){
   }
 
   const handleStatus = async (id) => {
+    setColor(true)
     const data = {
       status: 1
     }
@@ -33,8 +36,7 @@ function Table({users, id = ''}){
       url: `/api/reports/${id}`,
       data
     })
-
-    router.push('/')
+    setColor(false)
   }
 
   const daysPassed = (date1, date2) => {

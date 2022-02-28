@@ -49,9 +49,9 @@ function Form({ user = [], method = 'POST' }){
       <label htmlFor="phone">Telefono:</label>
       <input className={styles.input} type="text" id="phone" name="phone" placeholder="Telefono" onChange={handleChange} defaultValue={user.length !== 0 ? usuario.phone : ''} />
       <label htmlFor="mail">Correo Electronico:</label>
-      <input className={styles.input} type="text" id="mail" name="mail" placeholder="Correo Electronico" onChange={handleChange} defaultValue={user.length !== 0 ? usuario.phone : ''} />
+      <input className={styles.input} type="text" id="mail" name="mail" placeholder="Correo Electronico" onChange={handleChange} defaultValue={user.length !== 0 ? usuario.mail : ''} />
       <label htmlFor="media">Redes Sociales:</label>
-      <input className={styles.input} type="text" id="media" name="media" placeholder="Redes Sociales" onChange={handleChange} defaultValue={user.length !== 0 ? usuario.phone : ''} />
+      <input className={styles.input} type="text" id="media" name="media" placeholder="Redes Sociales" onChange={handleChange} defaultValue={user.length !== 0 ? usuario.media : ''} />
       <label htmlFor="service">Servicio Solicitado:</label>
       <input className={styles.input} type="text" id="service" name="service" placeholder="Servicio Solicitado" onChange={handleChange} defaultValue={user.length !== 0 ? usuario.service : ''} />
       <label htmlFor="area" className={styles.label}>Departamento:</label>
