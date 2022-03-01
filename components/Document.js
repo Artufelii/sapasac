@@ -146,7 +146,7 @@ const ReportsDocument = ({ users }) => {
                     : area === 'PIPA'
                     ? 'Pipas'
                     : area === 'CONS'
-                    ? 'Contrucción'
+                    ? 'Construcción'
                     : 'Alcantarillado'
                   }
                 </Text>
@@ -170,7 +170,7 @@ const ReportsDocument = ({ users }) => {
                     : area === 'PIPA'
                     ? 'Lic. Javier Madero'
                     : area === 'CONS'
-                    ? 'Lic. Rene Bujanos'
+                    ? 'C. Rene Bujanos'
                     : 'Lic. Victor Hugo Madero'
                   }
                 </Text>
