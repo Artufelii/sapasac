@@ -1,14 +1,16 @@
-import axios from 'axios'
 import Head from 'next/head'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import {Pagination} from '@material-ui/lab'
 import Layout from '../components/Layout'
 import Table from '../components/Table'
 import Buscador from '../components/Buscador'
 import {UsersContext} from '../UsersContext'
+import {getUsers} from '../helpers'
+import {useRouter} from 'next/router'
+const jwt = require('jsonwebtoken')
 
 export default function Reportes() {
-  const { users } = useContext(UsersContext)
+  const { users, setUsers } = useContext(UsersContext)
   
   const perPage = 20
   const [page, setPage] = useState(1)
@@ -17,10 +19,34 @@ export default function Reportes() {
 
   const count = Math.ceil(users.length / perPage)
 
+  const router = useRouter()
+
   const handleChange = (event, value) => {
     setPage(value)
     setFiltro(users.slice((value-1) * perPage, value * perPage))
   }
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+
+    if (!token) {
+      router.replace('/login')
+    } else {
+      jwt.verify(token, process.env.NEXT_PUBLIC_SECRET, function(err, decoded) {
+        if (err) {
+          router.replace('/login')
+        }
+      })
+    }
+  })
+  
+  useEffect(() => {
+
+    if (users.length === 0) {
+      getUsers()
+        .then(data => setUsers(data))
+    }
+  }, [users])
 
   return (
     <Layout>

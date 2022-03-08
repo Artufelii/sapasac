@@ -2,8 +2,17 @@ import Image from "next/image"
 import Link from "next/link"
 import styles from "../styles/Header.module.css"
 import sapasac from '../SAPASAC-IMAGOTIPO-HORIZONTAL.png'
+import {useRouter} from "next/router"
 
 function Header(){
+
+  const router = useRouter()
+
+  const logOut = () => {
+    localStorage.clear()
+    router.replace('/login')
+  }
+
   return(
     <header className={styles.container}>
       <div className={styles.image}>
@@ -23,9 +32,12 @@ function Header(){
           </Link>
         </li>
         <li>
-          <Link href="/reports">
+          <Link href="/nuevo-reporte">
             <a>Nuevo Reporte</a>
           </Link>
+        </li>
+        <li onClick={logOut}>
+          Cerrar Sesión
         </li>
       </ul>
     </header>

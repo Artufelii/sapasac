@@ -12,8 +12,8 @@
   padding: 8px;
 }
 
-.table tr:nth-child(even) {
-  background-color: #fff;
+.tr {
+  background-color: #aaa;
 }
 
 .amarillo {
@@ -22,6 +22,10 @@
 
 .rojo {
   background-color: red;
+}
+
+.verde {
+  background-color: green;
 }
 
 .svg {

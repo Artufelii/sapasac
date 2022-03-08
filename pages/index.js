@@ -1,4 +1,3 @@
-import axios from 'axios'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useContext, useState } from 'react'
@@ -8,26 +7,36 @@ import Table from '../components/Table'
 import {UsersContext} from '../UsersContext'
 import styles from '../styles/Form.module.css'
 import Buscador from '../components/Buscador'
+import {getUsers} from '../helpers'
+const jwt = require('jsonwebtoken')
+
 
 export default function Home() {
   const {setUsers} = useContext(UsersContext)
   const [filtro, setFiltro] = useState([])
   const router = useRouter()
 
+
   useEffect(() => {
-    const getUsers = async () => {
-      const {data} = await axios({
-        method: 'GET',
-        url: '/api/reports',
+    const token = localStorage.getItem('token')
+
+    if (!token) {
+      router.replace('/login')
+    } else {
+      jwt.verify(token, process.env.NEXT_PUBLIC_SECRET, function(err, decoded) {
+        if (err) {
+          router.push('/login')
+        }
       })
 
-      setUsers(data)
-      setFiltro(data.filter(({ date }) => {
-        return new Date(date).toLocaleDateString() === new Date().toLocaleDateString()
-      }))
+      getUsers()
+        .then(data => {
+          setUsers(data)
+          setFiltro(data.filter(({ date }) => {
+            return new Date(date).toLocaleDateString() === new Date().toLocaleDateString()
+          }))
+        })
     }
-
-    getUsers()
 
   }, [setUsers, setFiltro])
 

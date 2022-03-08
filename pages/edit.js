@@ -12,7 +12,7 @@ function Edit(){
       <Head>
         <title>Editar Reporte</title>
       </Head>
-      <Form user={user} method='PUT' />
+      <Form user={user} method='PUT' status={true} />
     </Layout>
   )
 }

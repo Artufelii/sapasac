@@ -40,7 +40,8 @@
   height: 30px;
   border-radius: 5px;
   outline-color: #EE333A;
-  margin-right: 100px;
+  display: block;
+  margin: 5px 0 10px 0;
 }
 
 .button,

@@ -1,9 +1,9 @@
 import axios from 'axios'
 import {useRouter} from 'next/router'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import styles from '../styles/Form.module.css'
 
-function Form({ user = [], method = 'POST' }){
+function Form({ user = [], method = 'POST', status = false}){
 
   const router = useRouter()
 
@@ -20,7 +20,17 @@ function Form({ user = [], method = 'POST' }){
     service: user.length !== 0 ? usuario.service : '',
     area: user.length !== 0 ? usuario.area : 'ALCA',
     obs: user.length !== 0 ? usuario.obs : '',
+    employe: '',
+    status: user.length !== 0 ? usuario.status : 0,
   })
+
+  
+
+  useEffect(() => {
+    const register = localStorage.getItem('user')
+    setData({...data, employe: register})
+  }, [setData]);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -61,6 +71,15 @@ function Form({ user = [], method = 'POST' }){
         <option value="CONS">Contrucción</option>
         <option value="PIPA">Pipa</option>
       </select>
+      {status &&
+        <>
+          <label htmlFor="status">Estado:</label>
+          <select id="status" name="status" className={styles.select} defaultValue={user.length !== 0 ? usuario.status : 0} onChange={handleChange}>
+            <option value={1}>Atendido</option>
+            <option value={0}>Pendiente</option>
+          </select>
+        </>
+      }
       <label htmlFor="obs">Observaciones:</label>
       <textarea id="obs" name="obs" placeholder="Observaciones" className={styles.textarea} onChange={handleChange} defaultValue={user.length !== 0 ? usuario.obs : ''} ></textarea>
       <button type="submit" className={styles.button}>Guardar</button>

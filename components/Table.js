@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react'
 import styles from '../styles/Table.module.css'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPrint, faPenToSquare, faCircleCheck, faExclamationTriangle, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
+import { faPrint, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import {useContext} from 'react'
 import {UsersContext} from '../UsersContext'
 import {useRouter} from 'next/router'
@@ -11,7 +10,6 @@ function Table({users, id = ''}){
 
   const { setUser } = useContext(UsersContext)
   const router = useRouter()
-  const [color, setColor] = useState(false)
 
   const handleClick = async(id, route) => {
     const {data} = await axios({
@@ -25,20 +23,6 @@ function Table({users, id = ''}){
     setTimeout(() => setUser([]), 6000*10*5)
   }
 
-  const handleStatus = async (id) => {
-    setColor(true)
-    const data = {
-      status: 1
-    }
-
-    await axios({
-      method: 'PUT',
-      url: `/api/reports/${id}`,
-      data
-    })
-    setColor(false)
-  }
-
   const daysPassed = (date1, date2) => {
     return Math.round((date2.getTime() - date1.getTime()) / 86400000)
   }
@@ -47,7 +31,7 @@ function Table({users, id = ''}){
   return(
     <table className={styles.table} id={id}>
       <thead>
-        <tr>
+        <tr className={styles.tr}>
           <th>Folio</th>
           <th>Fecha</th>
           <th>Nombre de Usuario</th>
@@ -58,24 +42,32 @@ function Table({users, id = ''}){
           <th>Servicio Solicitado</th>
           <th>Departamento</th>
           <th>Observaciones</th>
+          <th>Registrado por</th>
           <th>Imprimir</th>
           <th>Editar</th>
-          <th>Estatus</th>
         </tr>
       </thead>
       <tbody>
-        {users && users.map(({id, area, date, name, adress, colony, phone, mail, service, obs, status}) => (
+        {users && users.map(({id: userId, area, date, name, adress, colony, phone, mail, service, obs, status, employe}) => (
           <tr 
-            key={id}
+            key={userId}
+            className={
+             daysPassed(new Date(date), new Date()) >= 2 && daysPassed(new Date(date), new Date()) < 5 && !status ? 
+                styles.amarillo:
+             daysPassed(new Date(date), new Date()) >= 5 && !status ? 
+                styles.rojo:
+             status &&
+                styles.verde 
+            }
           >
             <td>
-              {id < 10 
-                ? `${area || 'ALCA'}000${id}` 
-                : id < 100 && id >= 10 
-                ? `${area || 'ALCA'}00${id}`
-                : id < 1000 && id >= 100 
-                ?`${area || 'ALCA'}0${id}`
-                :`${area || 'ALCA'}${id}`
+              {userId < 10 
+                ? `${area || 'ALCA'}000${userId}` 
+                : userId < 100 && userId >= 10 
+                ? `${area || 'ALCA'}00${userId}`
+                : userId < 1000 && userId >= 100 
+                ?`${area || 'ALCA'}0${userId}`
+                :`${area || 'ALCA'}${userId}`
               }
             </td>
             <td>{new Date(date).toLocaleDateString()}</td>
@@ -96,31 +88,18 @@ function Table({users, id = ''}){
               }
             </td>
             <td>{obs}</td>
+            <td>{employe}</td>
             <td 
-              onClick={() => handleClick(id, 'print')}
+              onClick={() => handleClick(userId, 'print')}
               style={{ cursor: 'pointer' }}
             >
               <FontAwesomeIcon icon={ faPrint }/>
             </td>
             <td 
-              onClick={() => handleClick(id, 'edit')}
+              onClick={() => handleClick(userId, 'edit')}
               style={{ cursor: 'pointer' }}
             >
               <FontAwesomeIcon icon={ faPenToSquare }/>
-            </td>
-            <td 
-              onClick={() => handleStatus(id)}
-              style={{ cursor: 'pointer', fontSize: '10px' }}
-            >
-              {
-                daysPassed(new Date(date), new Date()) >= 2 && daysPassed(new Date(date), new Date()) < 5 && !status ? 
-                  <FontAwesomeIcon icon={ faExclamationTriangle } color='yellow'/> :
-                daysPassed(new Date(date), new Date()) >= 5 && !status ? 
-                  <FontAwesomeIcon icon={ faCircleXmark } color='red'/> :
-                status ? 
-                  <FontAwesomeIcon icon={ faCircleCheck } color='green'/> : 
-                  <FontAwesomeIcon icon={ faCircleCheck } color='black'/> 
-              }
             </td>
           </tr>
         ))}

@@ -9,7 +9,7 @@ export default async function handler(req, res) {
               .json(response)
 
     case 'POST':
-      const {name, adress, colony, phone, mail, media, service, area, obs} = req.body
+      const {name, adress, colony, phone, mail, media, service, area, obs, employe} = req.body
 
       const [result] = await pool.query('INSERT INTO usuarios SET ?', {
         name, 
@@ -20,7 +20,8 @@ export default async function handler(req, res) {
         media,
         service,
         area,
-        obs
+        obs,
+        employe
       })
 
       return res
