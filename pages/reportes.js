@@ -46,7 +46,7 @@ export default function Reportes() {
       getUsers()
         .then(data => setUsers(data))
     }
-  }, [users])
+  }, [users, setUsers])
 
   return (
     <Layout>

@@ -5,7 +5,7 @@ import Form from "../components/Form"
 import Layout from "../components/Layout"
 const jwt = require('jsonwebtoken');
 
-function newReport(){
+function NewReport(){
 
   const router = useRouter()
 
@@ -33,4 +33,4 @@ function newReport(){
     )
 }
 
-export default newReport 
+export default NewReport 

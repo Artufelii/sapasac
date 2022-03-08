@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import {logIn} from "../helpers";
 import {useRouter} from "next/router";
 
-function login(){
+function Login(){
 
   const router = useRouter()
 
@@ -82,4 +82,4 @@ function login(){
   )
 }
 
-export default login
+export default Login
